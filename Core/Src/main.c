@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -92,6 +93,7 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   Beep_Init();
   BEEP_ON();
@@ -111,11 +113,11 @@ int main(void)
   {
 		//Led_Water();
     //pin_state = HAL_GPIO_ReadPin(INPUT_1_GPIO_Port,INPUT_1_Pin);
-    if(Beep_Trigger)
+    if(Beep_Trigger != 0)
     {
+      Beep_Alarm(Beep_Trigger);
       Beep_Trigger = 0;
-      Beep_Alarm(3);
-    }
+      
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
