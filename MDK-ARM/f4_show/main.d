@@ -28,6 +28,10 @@ f4_show/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
-  ..\Core\Inc\tim.h ..\Core\Inc\gpio.h ..\HDL\Inc\Beep.h \
-  ..\HDL\Inc\Led.h ..\IRQ\Inc\EXTI_IRQHandler.h \
-  ..\IRQ\Inc\TIM_IRQHandler.h ..\HDL\Inc\fsm.h
+  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
+  ..\Core\Inc\dma.h ..\Core\Inc\tim.h ..\Core\Inc\usart.h \
+  ..\Core\Inc\gpio.h ..\HDL\Inc\Beep.h ..\HDL\Inc\Led.h \
+  ..\IRQ\Inc\EXTI_IRQHandler.h ..\IRQ\Inc\TIM_IRQHandler.h \
+  ..\HDL\Inc\fsm.h ..\Core\Inc\vofa.h \
+  D:\keil\ARM\ARMCLANG\Bin\..\include\math.h \
+  ..\IRQ\Inc\UART_IRQHandler.h

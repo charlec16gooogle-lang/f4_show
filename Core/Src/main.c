@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -29,6 +30,9 @@
 #include "EXTI_IRQHandler.h"
 #include "TIM_IRQHandler.h"
 #include "fsm.h"
+#include "vofa.h"
+#include <math.h>
+#include "UART_IRQHandler.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -91,11 +95,13 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   Beep_Init();
+  UART_Start_Recieve();
   BEEP_ON();
   HAL_Delay(100);
   BEEP_OFF();
@@ -104,7 +110,8 @@ int main(void)
   HAL_GPIO_EXTI_Callback(INPUT_1_Pin);
   FSM_Init();
   FSM_SetMode(MODE_OFF);
-  FSM_Process();
+  VOFA_Init();
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -113,11 +120,13 @@ int main(void)
   {
 		//Led_Water();
     //pin_state = HAL_GPIO_ReadPin(INPUT_1_GPIO_Port,INPUT_1_Pin);
+    FSM_Process();
+    VOFA_SendTask();
     if(Beep_Trigger != 0)
     {
       Beep_Alarm(Beep_Trigger);
       Beep_Trigger = 0;
-      
+		} 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

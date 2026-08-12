@@ -63,7 +63,6 @@ void FSM_Process(void)
             HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_SET);
             HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_SET);
             //呼吸灯
-            TIM_PeriodElapsedCallback();
             break;
     }
 }

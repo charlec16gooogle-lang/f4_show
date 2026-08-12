@@ -17,6 +17,6 @@
 
 /*--------------------------------Function---------------------------------*/
 
-void Led_water(void);
+void Led_Water(void);
 
 #endif
