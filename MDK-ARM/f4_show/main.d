@@ -35,4 +35,4 @@ f4_show/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\HDL\Inc\Led.h ..\IRQ\Inc\EXTI_IRQHandler.h \
   ..\IRQ\Inc\TIM_IRQHandler.h ..\HDL\Inc\fsm.h ..\Core\Inc\vofa.h \
   D:\keil\ARM\ARMCLANG\Bin\..\include\math.h \
-  ..\IRQ\Inc\UART_IRQHandler.h
+  ..\IRQ\Inc\UART_IRQHandler.h ..\IRQ\Inc\CAN_IRQHandler.h

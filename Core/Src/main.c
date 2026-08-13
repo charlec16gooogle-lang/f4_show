@@ -34,6 +34,7 @@
 #include "vofa.h"
 #include <math.h>
 #include "UART_IRQHandler.h"
+#include "CAN_IRQHandler.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -122,7 +123,7 @@ int main(void)
 		//Led_Water();
     //pin_state = HAL_GPIO_ReadPin(INPUT_1_GPIO_Port,INPUT_1_Pin);
     FSM_Process();
-    VOFA_SendTask();
+    //VOFA_SendTask();
     if(Beep_Trigger != 0)
     {
       Beep_Alarm(Beep_Trigger);

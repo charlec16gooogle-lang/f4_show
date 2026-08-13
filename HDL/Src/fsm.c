@@ -71,7 +71,7 @@ void FSM_Process(void)
         }
 
         // 发送给电机
-        CAN_Send_Data(0x200, can_data);
+        CAN_Send_Data(0x01020201, can_data);
     }
 
     switch (current_mode)

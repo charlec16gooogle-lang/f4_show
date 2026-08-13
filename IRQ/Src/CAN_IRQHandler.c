@@ -1,5 +1,7 @@
 #include "CAN_IRQHandler.h"
 #include "can.h"
+#include "beep.h"
+#include "fsm.h"
 
 CAN_RxHeaderTypeDef RxHeader;
 CAN_TxHeaderTypeDef TxHeader;
@@ -7,11 +9,11 @@ uint8_t RxData[8];
 uint8_t TxData[8];
 uint32_t TxMailbox;
 
-void CAN_Send_Data(uint16_t id, uint8_t *data)
+void CAN_Send_Data(uint32_t id, uint8_t *data)
 {
-    TxHeader.StdId = id;
+    TxHeader.ExtId = id;
     TxHeader.ExtId = 0x00;
-    TxHeader.IDE = CAN_ID_STD;
+    TxHeader.IDE = CAN_ID_EXT;
     TxHeader.RTR = CAN_RTR_DATA;
     TxHeader.DLC = 8;
     TxHeader.TransmitGlobalTime = DISABLE;
@@ -34,19 +36,25 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
         if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK)
         {
             // todo
-            if (RxHeader.StdId == 0x201)
+            uint8_t ack_data[8] = {'O', 'K', 0, 0, 0, 0, 0, 0};
+            if (RxHeader.IDE == CAN_ID_EXT &&RxHeader.ExtId == 0x01020201)
             {
+               uint8_t ack_data[8] = {'O', 'K', 0, 0, 0, 0, 0, 0};
+               CAN_Send_Data(0x02010201, ack_data); 
                Beep_Trigger = 1;
+               FSM_SetMode(MODE_WATER);
             }
-            else if (
-                RxHeader.StdId == 0x202)
+            else if (RxHeader.IDE == CAN_ID_EXT && RxHeader.ExtId == 0x01020101)
             {
-                //这是二号电机发来的反馈...
+               uint8_t ack_data[8] = {'O', 'K', 0, 0, 0, 0, 0, 0};
+               CAN_Send_Data(0x02010101, ack_data); 
+               Beep_Trigger = 0;
+               FSM_SetMode(MODE_BREATH);
             }
         
         }
     }
-    else if (hcan->Instance == CAN2)
+    else if (hcan->Instance == CAN2) //可以删掉吧
     {
         if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK)
         {

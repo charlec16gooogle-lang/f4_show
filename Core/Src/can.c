@@ -54,18 +54,18 @@ void MX_CAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
-  CAN_FilterTypeDef CAN_FilterConfig; //定义
+ CAN_FilterTypeDef CAN_FilterConfig; //定义
   /*-------------------------------过滤器1--------------------------------*/
   CAN_FilterConfig.FilterActivation = ENABLE; //使能过滤�?
   CAN_FilterConfig.SlaveStartFilterBank = 14; //从滤波器�?14�?�?14-27
   CAN_FilterConfig.FilterBank = 0;            //过滤器组0
-  CAN_FilterConfig.FilterScale = CAN_FILTERSCALE_16BIT; //位宽
-  CAN_FilterConfig.FilterMode = CAN_FILTERMODE_IDLIST; //掩码模式 
+  CAN_FilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; //位宽
+  CAN_FilterConfig.FilterMode = CAN_FILTERMODE_IDMASK; //掩码模式 
   CAN_FilterConfig.FilterFIFOAssignment = CAN_FILTER_FIFO0; //过滤器分配到FIFO0
-  CAN_FilterConfig.FilterIdHigh = (0x201 << 5); //基准高位 FR0�?16�?(位宽16�?)
-  CAN_FilterConfig.FilterMaskIdHigh =  (0x202 << 5); //掩码高位 FR1�?16�?
-  CAN_FilterConfig.FilterIdLow = (0x203 << 5); //基准低位 FR0�?16�?
-  CAN_FilterConfig.FilterMaskIdLow =  (0x204 << 5); //掩码低位 FR1�?16�?
+  CAN_FilterConfig.FilterIdHigh = ((0x01020101 << 3)|4)>>16; //基准高位 FR0�?16�?(位宽16�?)
+  CAN_FilterConfig.FilterMaskIdHigh =  ((0x1FFFFCFF << 3)|4)>>16; //掩码高位 FR1�?16�?
+  CAN_FilterConfig.FilterIdLow = ((0x01020101 << 3)|4)&0xFFFF; //基准低位 FR0?16?
+  CAN_FilterConfig.FilterMaskIdLow =   ((0x1FFFFCFF << 3)|4)&0xFFFF; //掩码低位 FR1?16?
   if (HAL_CAN_ConfigFilter(&hcan1, &CAN_FilterConfig) != HAL_OK)
   {
     /* Filter configuration Error */
