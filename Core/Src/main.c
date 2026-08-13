@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "can.h"
 #include "dma.h"
 #include "tim.h"
 #include "usart.h"
@@ -99,6 +100,7 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_USART1_UART_Init();
+  MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
   Beep_Init();
   UART_Start_Recieve();
@@ -107,7 +109,6 @@ int main(void)
   BEEP_OFF();
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); 
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-  HAL_GPIO_EXTI_Callback(INPUT_1_Pin);
   FSM_Init();
   FSM_SetMode(MODE_OFF);
   VOFA_Init();

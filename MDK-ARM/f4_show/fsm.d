@@ -21,6 +21,7 @@ f4_show/fsm.o: ..\HDL\Src\fsm.c ..\HDL\Inc\fsm.h ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h \
+  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h \
@@ -30,4 +31,5 @@ f4_show/fsm.o: ..\HDL\Src\fsm.c ..\HDL\Inc\fsm.h ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
   ..\HDL\Inc\beep.h ..\Core\Inc\gpio.h ..\HDL\Inc\led.h \
-  ..\Core\Inc\tim.h
+  ..\Core\Inc\tim.h ..\IRQ\Inc\CAN_IRQHandler.h \
+  ..\IRQ\Inc\EXTI_IRQHandler.h ..\Core\Inc\can.h

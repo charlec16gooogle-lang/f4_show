@@ -1,6 +1,6 @@
-f4_show/stm32f4xx_hal.o: \
-  ..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c \
-  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
+f4_show/can_irqhandler.o: ..\IRQ\Src\CAN_IRQHandler.c \
+  ..\IRQ\Inc\CAN_IRQHandler.h ..\IRQ\Inc\EXTI_IRQHandler.h \
+  ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h \
@@ -30,4 +30,5 @@ f4_show/stm32f4xx_hal.o: \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
-  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
+  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
+  ..\Core\Inc\can.h
