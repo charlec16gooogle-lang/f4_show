@@ -55,33 +55,36 @@ void MX_CAN1_Init(void)
   }
   /* USER CODE BEGIN CAN1_Init 2 */
  CAN_FilterTypeDef CAN_FilterConfig; //定义
-  /*-------------------------------过滤器1--------------------------------*/
-  CAN_FilterConfig.FilterActivation = ENABLE; //使能过滤�?
-  CAN_FilterConfig.SlaveStartFilterBank = 14; //从滤波器�?14�?�?14-27
+  /*-------------------------------过滤�??1--------------------------------*/
+  CAN_FilterConfig.FilterActivation = ENABLE; //使能过滤�???
+  CAN_FilterConfig.SlaveStartFilterBank = 14; //从滤波器�???14�???�???14-27
   CAN_FilterConfig.FilterBank = 0;            //过滤器组0
-  CAN_FilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; //位宽
-  CAN_FilterConfig.FilterMode = CAN_FILTERMODE_IDMASK; //掩码模式 
-  CAN_FilterConfig.FilterFIFOAssignment = CAN_FILTER_FIFO0; //过滤器分配到FIFO0
-  CAN_FilterConfig.FilterIdHigh = ((0x01020101 << 3)|4)>>16; //基准高位 FR0�?16�?(位宽16�?)
-  CAN_FilterConfig.FilterMaskIdHigh =  ((0x1FFFFCFF << 3)|4)>>16; //掩码高位 FR1�?16�?
-  CAN_FilterConfig.FilterIdLow = ((0x01020101 << 3)|4)&0xFFFF; //基准低位 FR0?16?
-  CAN_FilterConfig.FilterMaskIdLow =   ((0x1FFFFCFF << 3)|4)&0xFFFF; //掩码低位 FR1?16?
+ CAN_FilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;   // 32 位宽
+  CAN_FilterConfig.FilterMode = CAN_FILTERMODE_IDLIST;    // 列表模式（白名单模式�?
+  CAN_FilterConfig.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+
+  // 白名�? ID 1：只放行 0x101 (主板呼吸灯控制帧)
+  // 标准帧在 32 位寄存器中需要左�? 21 �?
+  CAN_FilterConfig.FilterIdHigh = (0x101 << 5);           // (0x101 << 21) >> 16
+  CAN_FilterConfig.FilterIdLow  = 0x0000;
+
+  // 白名�? ID 2：只放行 0x301 (CANable 蜂鸣器触发帧)
+  CAN_FilterConfig.FilterMaskIdHigh = (0x301 << 5);       // (0x301 << 21) >> 16
+  CAN_FilterConfig.FilterMaskIdLow  = 0x0000;
+
   if (HAL_CAN_ConfigFilter(&hcan1, &CAN_FilterConfig) != HAL_OK)
   {
     /* Filter configuration Error */
     Error_Handler();
   }
 
+  // 启动 CAN1 外设
   if (HAL_CAN_Start(&hcan1) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
   }
-  if(HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
-  {
-    /* Notification Error */
-    Error_Handler();
-  }
+  // �?�? FIFO0 消息挂起接收中断
   if(HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
   {
     /* Notification Error */
@@ -117,9 +120,9 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* CAN1 interrupt Init */
-    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
-    HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
   /* USER CODE BEGIN CAN1_MspInit 1 */
 
