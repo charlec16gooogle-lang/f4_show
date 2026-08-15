@@ -45,8 +45,7 @@ f4_show/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h \
   ..\Core\Inc\can.h ..\Core\Inc\dma.h ..\Core\Inc\tim.h \
-  ..\Core\Inc\usart.h ..\Core\Inc\gpio.h ..\HDL\Inc\Beep.h \
-  ..\HDL\Inc\Led.h ..\IRQ\Inc\EXTI_IRQHandler.h \
-  ..\IRQ\Inc\TIM_IRQHandler.h ..\HDL\Inc\fsm.h ..\Core\Inc\vofa.h \
-  D:\keil\ARM\ARMCLANG\Bin\..\include\math.h \
-  ..\IRQ\Inc\UART_IRQHandler.h ..\IRQ\Inc\CAN_IRQHandler.h
+  ..\Core\Inc\usart.h ..\Core\Inc\gpio.h ..\Core\Inc\app_protocol.h \
+  ..\HDL\Inc\Beep.h ..\HDL\Inc\Led.h \
+  D:\keil\ARM\ARMCLANG\Bin\..\include\math.h ..\IRQ\Inc\CAN_IRQHandler.h \
+  ..\IRQ\Inc\EXTI_IRQHandler.h ..\HDL\Inc\fsm.h

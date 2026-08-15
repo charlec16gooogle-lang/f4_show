@@ -5,7 +5,7 @@
 /* ======================================================== */
 /* 1. 全局变量区：用来存放收到的指令，相当于以前的状态机模式 */
 /* ======================================================== */
-volatile uint8_t  g_breathe_enable = 1;       // 呼吸灯开关：1 开, 0 关 (默认开启)
+volatile uint8_t  g_breathe_enable = 0;       // 呼吸灯开关：1 开, 0 关 (默认开启)
 volatile uint16_t g_breathe_period_ms = 1000; // 呼吸周期：默认 1000ms
 volatile uint8_t  g_beep_remaining_count = 0; // 蜂鸣器还要响几次
 
