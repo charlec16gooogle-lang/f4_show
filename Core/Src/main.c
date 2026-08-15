@@ -24,17 +24,13 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include "app_protocol.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Beep.h"
 #include "Led.h"
-#include "EXTI_IRQHandler.h"
-#include "TIM_IRQHandler.h"
-#include "fsm.h"
-#include "vofa.h"
 #include <math.h>
-#include "UART_IRQHandler.h"
 #include "CAN_IRQHandler.h"
 /* USER CODE END Includes */
 
@@ -106,15 +102,11 @@ int main(void)
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
   Beep_Init();
-  UART_Start_Recieve();
   BEEP_ON();
   HAL_Delay(100);
   BEEP_OFF();
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); 
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-  FSM_Init();
-  FSM_SetMode(MODE_OFF);
-  VOFA_Init();
   
   /* USER CODE END 2 */
 
@@ -134,7 +126,6 @@ int main(void)
     //pin_state = HAL_GPIO_ReadPin(INPUT_1_GPIO_Port,INPUT_1_Pin);
     FSM_Process();
     VOFA_SendTask();
-    HAL_CAN_RxFifo0MsgPendingCallback(&hcan1);
     if(Beep_Trigger != 0)
     {
       Beep_Alarm(Beep_Trigger);
